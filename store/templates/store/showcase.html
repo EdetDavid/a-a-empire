@@ -1,0 +1,137 @@
+{% load static %}
+<style>
+  /* Custom Styles */
+  .carousel-inner img {
+    width: 100%;
+    height: auto;
+  }
+</style>
+
+
+<body>
+  <div id="showcase" class="container-fluid">
+    <div class="row justify-content-center align-items-center">
+      <div class="col-lg-8 col-md-10 col-12">
+        <!-- Search Section -->
+        <div class="searchdiv">
+          <br />
+          <div class="inputs my-4">
+            <form class="input-group w-100" action="{% url 'product_search' %}" method="GET">
+              <input name="q" class="input-field form-control" placeholder="Search Product Category" />
+              <button type="submit" class="search btn btn-warning">
+                Search
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-3 d-none d-lg-block">
+        <!-- Left Sidebar -->
+        <div class="category">
+          <ul>
+            <li class="nav-item my-2">
+              <a class="nav-link" href="#"><i class="mx-2 fa fa-shopping-cart"></i>Supermarket</a>
+            </li>
+            <li class="nav-item my-2">
+              <a class="nav-link" href="#"><i class="mx-2 fa fa-medkit"></i>Health & Beauty</a>
+            </li>
+            <li class="nav-item my-2">
+              <a class="nav-link" href="#"><i class="mx-2 fa fa-building"></i>Home & Office</a>
+            </li>
+            <li class="nav-item my-2">
+              <a class="nav-link" href="#"><i class="mx-2 fa fa-laptop"></i>Computing</a>
+            </li>
+            <li class="nav-item my-2">
+              <a class="nav-link" href="#"><i class="mx-2 fa fa-gamepad"></i>Gaming</a>
+            </li>
+            <li class="nav-item my-2">
+              <a class="nav-link" href="#"><i class="mx-2 fa fa-laptop"></i>Electronic</a>
+            </li>
+            <li class="nav-item my-2">
+              <a class="nav-link" href="#"><i class="mx-2 fa fa-shopping-bag"></i>Fashion</a>
+            </li>
+            <li class="nav-item my-2">
+              <a class="nav-link" href="#"><i class="mx-2 fa fa-child"></i>Baby Products</a>
+            </li>
+            <li class="nav-item my-2">
+              <a class="nav-link" href="#"><i class="mx-2 fa fa-trophy"></i>Sports</a>
+            </li>
+            <li class="nav-item my-2">
+              <a class="nav-link" href="#"><i class="mx-2 fa fa-leaf"></i>Garden</a>
+            </li>
+            <li class="nav-item my-2">
+              <a class="nav-link" href="#"><i class="mx-2 fa fa-search-plus"></i>Other Category</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-lg-6 col-md-12">
+        <!-- Main Content Area -->
+        <div class="categoryresults">
+          <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img src="{% static 'images/alcohol.jpg' %}" class="d-block w-100" alt="..." />
+              </div>
+              <div class="carousel-item">
+                <img src="https://ke.jumia.is/cms/2023/W16/PriceDrop/Groceries/KE_PriceDrop_Grocery_0423_S.jpg"
+                  class="d-block w-100" alt="..." />
+              </div>
+              <div class="carousel-item">
+                <img src="https://ke.jumia.is/cms/2023/W15/HP/KE_Beauty_AB_0423_S.jpg" class="d-block w-100"
+                  alt="..." />
+              </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade"
+              data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade"
+              data-bs-slide="next">
+
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-3 d-none d-lg-block">
+        <!-- Right Sidebar -->
+        <div class="extra">
+          <div class="policy">
+            <div class="quality">
+              <h4>Quality</h4>
+              <p>You can trust</p>
+            </div>
+            <div class="return">
+              <h4>Easy Return</h4>
+              <p>Quick Refund</p>
+            </div>
+          </div>
+          <div class="ads"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Activate the carousel
+    $(".carousel").carousel();
+
+    // Automatically slide the carousel every 3 seconds
+    setInterval(function () {
+      $(".carousel").carousel("next");
+    }, 2000);
+  </script>

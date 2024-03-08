@@ -1,0 +1,37 @@
+{% extends 'main.html' %} {% load static %} {% block content %}
+<body  style="background-image: url('{% static  "images/sky.jpg" %}');">
+  
+  <div class="d-flex p-5 m-5  flex-column  justify-content-center align-items-center">
+  {% for message in messages %}
+
+<h5 class="text-danger text center"> Incorrect Credentials  </h5>
+
+  {% endfor %}
+<form class=" auth-form w-sm-50 mx-auto  bg-black" method="POST"  action=" {% url 'login' %} ">
+  
+  {% csrf_token %}
+  <h1 class="text-white  fw-bolder text-center">Login</h1>
+  <hr class="hr">
+  <input
+    type="text"
+    class="form-control form__login-input border-right-0 border-left-0 border-top-0 my-3"
+    name="username"
+    placeholder="Enter Username"
+    required
+  />
+
+
+  <input
+    type="password"
+    class="form-control form__login-input border-right-0 border-left-0 border-top-0"
+    name="password"
+    placeholder="Enter Password"
+    required
+  />
+
+  <button type="submit" class="btn btn-info mt-2"> Login </button>
+</form>
+</div>
+</body>
+
+{% endblock content %}
