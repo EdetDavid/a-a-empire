@@ -4,15 +4,6 @@ from embed_video.fields import EmbedVideoField
 
 # Create your models here.
 
-class Customer(models.Model):
-    user = models.OneToOneField(
-        User, null=True, blank=True, on_delete=models.CASCADE)
-    name = models.CharField(max_length=200, null=True)
-    email = models.CharField(max_length=200)
-
-    def __str__(self):
-        return self.name
-
 
 class Product(models.Model):
     name = models.CharField(max_length=200)
@@ -34,7 +25,7 @@ class Product(models.Model):
 
 class Order(models.Model):
     customer = models.ForeignKey(
-        Customer, on_delete=models.SET_NULL, null=True, blank=True)
+        User, on_delete=models.SET_NULL, null=True, blank=True)
     date_ordered = models.DateTimeField(auto_now_add=True)
     complete = models.BooleanField(default=False)
     transaction_id = models.CharField(max_length=100, null=True)
@@ -47,20 +38,21 @@ class Order(models.Model):
         shipping = False
         orderitems = self.orderitem_set.all()
         for i in orderitems:
-            if i.product.digital == False:
+            if not i.product.digital:
                 shipping = True
+                break
         return shipping
 
     @property
     def get_cart_total(self):
         orderitems = self.orderitem_set.all()
-        total = sum([item.get_total for item in orderitems])
+        total = sum(item.get_total for item in orderitems)
         return total
 
     @property
     def get_cart_items(self):
         orderitems = self.orderitem_set.all()
-        total = sum([item.quantity for item in orderitems])
+        total = sum(item.quantity for item in orderitems)
         return total
 
 
@@ -80,8 +72,7 @@ class OrderItem(models.Model):
 
 
 class ShippingAddress(models.Model):
-    customer = models.ForeignKey(
-        Customer, on_delete=models.SET_NULL, null=True)
+    customer = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True)
     address = models.CharField(max_length=200, null=False)
     city = models.CharField(max_length=200, null=False)
@@ -91,52 +82,3 @@ class ShippingAddress(models.Model):
 
     def __str__(self):
         return self.address
-
-
-class Song(models.Model):
-    title = models.TextField()
-    artist = models.TextField()
-    image = models.ImageField()
-    audio_file = models.FileField(blank=True, null=True)
-    audio_link = models.CharField(max_length=200, blank=True, null=True)
-    duration = models.CharField(max_length=20)
-    paginate_by = 2
-
-    def __str__(self):
-        return self.title
-
-
-class Video(models.Model):
-	title = models.CharField(max_length=100)
-	added = models.DateTimeField(auto_now_add=True)
-	url  = EmbedVideoField()
-
-	def __str__(self) :
-		return str(self.title)
-
-
-	class Meta:
-		ordering = ['-added']
-	
- 
- 
-class NewsLetter(models.Model):
-    email = models.EmailField()
-    
-    def __str__(self):
-        return self.email
-    
-    
-class Contact(models.Model):
-    name = models.CharField(max_length=250)
-    email = models.EmailField(max_length=500, null=False)
-    phone = models.CharField(max_length=100)
-    message = models.TextField()
-    
-    
-    def __str__(self):
-        return self.name
-    
-    
-    
-    

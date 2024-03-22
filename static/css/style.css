@@ -1,0 +1,402 @@
+@import url(https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap);
+
+
+
+*:focus {
+  outline: none;
+   user-select: none;
+}
+html {
+  background: #000;
+}
+body {
+  margin: 0;
+  font-family: Poppins, sans-serif;
+  color: rgba(0, 0, 0, 0.8);
+  font-weight: 400;
+  line-height: 1.58;
+  letter-spacing: -0.003em;
+  font-size: 20px;
+  
+  
+}
+h1 {
+  margin: 0;
+  font-size: 33px;
+  color: #fff;
+  padding: 0 10%;
+}
+
+#preloader {
+  background-color: #000 !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-size: 15% !important;
+  height: 100vh !important;
+  width: 100vw !important;
+  position: fixed;
+  z-index: 100 !important;
+}
+
+h3 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 500;
+  color: #ccc;
+  padding: 0 10%;
+}
+.music-container {
+  display: block;
+  width: 100%;
+  height: 100vh;
+  margin: auto;
+  overflow: scroll;
+  background-image: url("https://mariongrandvincent.github.io/HTML-Personal-website/img-codePen/bg-music-player.jpg");
+  background-repeat: repeat;
+  background-size: cover;
+  padding-bottom: 200px;
+}
+.music-player {
+  display: block;
+  position: relative;
+  width: 400px;
+  height: 600px;
+  margin: auto;
+  margin-top: 6% ;
+  border-radius: 0 0 10px 10px;
+  background: transparent
+    linear-gradient(to bottom, rgba(10, 11, 31, 0.9) 50%, rgb(10, 11, 31) 70%)
+    repeat scroll 0 0;
+  box-shadow: 1px 10px 20px 5px #222;
+}
+
+.cover {
+  float: left;
+  width: 100%;
+  height: 66%;
+}
+.cover img {
+  display: block;
+  position: absolute;
+  top: 8%;
+  left: 14%;
+  width: 70%;
+  margin: auto;
+  text-align: center;
+}
+.titre {
+  float: left;
+  width: 100%;
+}
+.lecteur {
+  width: 100%;
+  display: block;
+  height: auto;
+  position: relative;
+  float: left;
+}
+.mejs__button > button:focus {
+  outline: 0px dotted #999;
+}
+.mejs__container {
+  position: relative;
+  background-color: transparent;
+  min-width: auto !important;
+}
+.mejs__controls {
+  padding: 0 20%;
+  background: transparent !important;
+  display: block;
+  position: relative;
+}
+.mejs__controls div {
+  display: block;
+  float: left;
+  position: relative;
+}
+.mejs__controls .mejs__playpause-button {
+  position: absolute !important;
+  right: 8%;
+  bottom: 95%;
+  width: 40px;
+}
+.mejs__controls .mejs__playpause-button button {
+  display: block;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 0;
+  font-family: FontAwesome;
+  font-size: 23px;
+  color: #5bbb95;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+}
+.mejs__controls .mejs__play button:before {
+  content: "\f04b";
+}
+.mejs__controls .mejs__pause button:before {
+  content: "\f04c";
+}
+.mejs__controls .mejs__volume-button button {
+  display: block;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 0;
+  font-family: FontAwesome;
+  font-size: 20px;
+  color: #5bbb95;
+  background: transparent;
+  margin: 0;
+  padding: 0;
+}
+.mejs__controls .mejs__mute button:before {
+  content: "\f028";
+}
+.mejs__controls .mejs__unmute button:before {
+  content: "\f026";
+}
+.mejs__controls .mejs__time {
+  width: 100%;
+  margin-top: 7%;
+  margin-bottom: 3%;
+  color: #fff;
+  height: auto;
+  padding: 0;
+  overflow: visible;
+  min-width: 100%;
+}
+.mejs__controls .mejs__time span {
+  font-size: 15px;
+}
+.mejs__controls span.mejs__duration {
+  float: right;
+  text-align: right;
+  color: #ccc;
+}
+.mejs__controls span.mejs__currenttime {
+  font-weight: 700;
+  float: left;
+}
+.mejs__controls .mejs__time-rail {
+  width: 100%;
+  margin: 0;
+}
+.mejs__controls .mejs__time-rail span {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 4px;
+  border-radius: 50px;
+  cursor: pointer;
+}
+.mejs__controls .mejs__time-rail .mejs__time-loaded {
+  background: rgba(255, 255, 255, 0.2);
+}
+.mejs__controls .mejs__time-rail .mejs__time-float {
+  display: none;
+  top: -40px;
+  width: 40px;
+  height: 25px;
+  margin-left: 0px;
+  text-align: center;
+  font-size: 10px;
+  background: #fff;
+  border: 0;
+}
+.mejs__controls .mejs__time-rail .mejs__time-float-current {
+  display: block;
+  position: relative;
+  top: 0;
+  margin: 0;
+  line-height: 26px;
+  color: #100d28;
+}
+.mejs__controls .mejs__time-rail .mejs__time-float-corner {
+  top: auto;
+  bottom: -9px;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-top: 6px solid #fff;
+  border-right: 6px solid transparent;
+  border-left: 6px solid transparent;
+}
+.mejs__controls .mejs__time-rail .mejs__time-current {
+  background: #5bbb95 none repeat scroll 0 0;
+}
+.mejs__controls .mejs__time-handle {
+  display: none;
+}
+.mejs__controls .mejs__volume-button {
+  position: relative;
+  position: absolute !important;
+  top: 70px;
+  right: 25%;
+  width: 40px;
+  height: 40px;
+}
+.mejs__controls .mejs__horizontal-volume-slider {
+  display: block;
+  position: absolute !important;
+  position: relative;
+  top: 70px;
+  right: 10%;
+  width: 60px;
+  height: 4px;
+  margin-top: 18px;
+  border-radius: 50px;
+  line-height: 11px;
+}
+.mejs__controls .mejs__horizontal-volume-slider .mejs__horizontal-volume-total,
+.mejs__controls
+  .mejs__horizontal-volume-slider
+  .mejs__horizontal-volume-current {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.1);
+}
+.mejs__controls
+  .mejs__horizontal-volume-slider
+  .mejs__horizontal-volume-current {
+  background: #fff;
+}
+
+.fa-download {
+  font-size: 23px ;
+
+  
+}
+
+@media screen and (max-device-width: 900px), (max-width: 900px) {
+  .mejs__controls .mejs__playpause-button button,
+  .fa-download {
+    font-size: 32px;
+  }
+
+  .music-player{
+    height: 650px ;
+  }
+  
+  h1{
+    font-size: 32px ;
+  }
+
+  h3 {
+    font-size: 25px ;
+  }
+
+  button{
+    width: 140px;
+    height: 60px;
+    font-size: 1.5rem;
+  }
+
+
+  .fa-download{
+    margin-left: 15px ;
+    font-size: 33px ;
+
+  }
+  .mejs__controls .mejs__playpause-button button {
+    margin-right: 90px ;
+  }
+
+  .dropdown-menu {
+    width: 30% !important  ;
+  }
+}
+
+@media screen and (max-device-width: 900px),
+  (max-width: 900px) and (min-device-width: 500px),
+  (min-width: 500px) {
+  .music-player {
+    margin-top: 120px ;
+  }
+}
+
+@media screen and (max-device-width: 500px), (max-width: 500px) {
+  .music-player {
+    margin-top: 30% ;
+    width: 700px ;
+    height: 1000px ;
+  }
+
+  .mejs__controls .mejs__playpause-button button,
+  .fa-download {
+    font-size: 52px;
+    overflow: hidden; ;
+  }
+
+
+  .fa-step-forward, .fa-step-backward{
+    font-size: 70px !important;
+  }
+
+  nav {
+    padding: 50px !important;
+    
+  }
+
+  .navbar-toggler-icon {
+    font-size: 45px !important;
+  }
+
+  nav a{
+    font-size: 35px;
+  }
+ 
+   nav a.btn, nav a.nav-link{
+    font-size: 35px ;
+    padding:  12px;
+  }
+
+  h1{
+    font-size: 42px ;
+  }
+
+  h3 {
+    font-size: 35px ;
+  }
+
+
+
+  nav .navbar-brand {
+    font-size: 52px ;
+  }
+
+  #footer {
+    padding: 50px !important;
+    font-size: 2rem !important;
+  }
+}
+
+textarea:focus,
+textarea.form-control:focus,
+input.form-control:focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus,
+input[type="number"]:focus,
+[type="text"].form-control:focus,
+[type="password"].form-control:focus,
+[type="email"].form-control:focus,
+[type="tel"].form-control:focus,
+[contenteditable].form-control:focus {
+  box-shadow: none;
+}
+.navbar-toggler,
+.navbar-toggler:focus,
+.navbar-toggler:active,
+.navbar-toggler-icon:focus {
+  outline: none;
+  box-shadow: none;
+  border: none;
+}
+
+

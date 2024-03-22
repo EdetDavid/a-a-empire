@@ -12,8 +12,9 @@ from django.shortcuts import render, get_object_or_404
 from django.contrib import messages
 
 
-@login_required(login_url="login")
 def register(request):
+    data = cartData(request)
+    cartItems = data["cartItems"]
     if request.method == "POST":
         username = request.POST["username"]
         email = request.POST["email"]
@@ -22,10 +23,10 @@ def register(request):
 
         if password == password2:
             if User.objects.filter(username=username).exists():
-                messages.info(request, "username Already Taken")
+                messages.info(request, "Username already taken")
                 return redirect("register")
             elif User.objects.filter(email=email).exists():
-                messages.info(request, "Email Already Used ")
+                messages.info(request, "Email already used ")
                 return redirect(reverse("register"))
 
             else:
@@ -38,10 +39,13 @@ def register(request):
             messages.error(request, "Password does not  match")
             return redirect("register")
     else:
-        return render(request, "store/register.html")
+        context = {"cartItems": cartItems}
+        return render(request, "store/authenticate.html", context)
 
 
 def login(request):
+    data = cartData(request)
+    cartItems = data["cartItems"]
     if request.method == "POST":
         username = request.POST["username"]
         password = request.POST["password"]
@@ -55,7 +59,8 @@ def login(request):
             messages.info(request, "Invalid Credentials!")
             return redirect("login")
     else:
-        return render(request, "store/login.html")
+        context = {"cartItems": cartItems}
+        return render(request, "store/authenticate.html", context)
 
 
 def logout(request):
@@ -105,6 +110,7 @@ def cart(request):
     return render(request, "store/cart.html", context)
 
 
+@login_required(login_url=login)
 def checkout(request):
     data = cartData(request)
 
@@ -123,11 +129,13 @@ def updateItem(request):
     print("Action:", action)
     print("Product:", productId)
 
-    customer = request.user.customer
+    customer = request.user
     product = Product.objects.get(id=productId)
-    order, created = Order.objects.get_or_create(customer=customer, complete=False)
+    order, created = Order.objects.get_or_create(
+        customer=customer, complete=False)
 
-    orderItem, created = OrderItem.objects.get_or_create(order=order, product=product)
+    orderItem, created = OrderItem.objects.get_or_create(
+        order=order, product=product)
 
     if action == "add":
         orderItem.quantity = orderItem.quantity + 1
@@ -147,8 +155,9 @@ def processOrder(request):
     data = json.loads(request.body)
 
     if request.user.is_authenticated:
-        customer = request.user.customer
-        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        customer = request.user
+        order, created = Order.objects.get_or_create(
+            customer=customer, complete=False)
     else:
         customer, order = guestOrder(request, data)
 

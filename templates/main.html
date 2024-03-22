@@ -3,12 +3,19 @@
 <html>
 
 <head>
-  {% url 'store' as store %} {% url 'cart' as cart %} {% url 'checkout' as checkout %} {% if request.path == store %}
+  {% url 'store' as store %} {% url 'cart' as cart %} {% url 'checkout' as checkout %} {% url 'register' as register %}
+  {% url 'login' as login %} {% if request.path == store %}
 
   <title>A&A Empire | Store</title>
 
   {% elif request.path == cart %}
   <title>A&A Empire | Cart</title>
+
+  {% elif request.path == login %}
+  <title>A&A Empire | Login</title>
+
+  {% elif request.path == register %}
+  <title>A&A Empire | Register</title>
 
   {% else %}
   <title>A&A Empire | Checkout</title>
@@ -85,7 +92,7 @@
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-black px-3  ">
     <a class="navbar-brand" href="/">
       <img id="nav-logo" src="/static/images/logo.png" class="m-2" width="100" alt="logo" style="filter: invert(0)" />
     </a>
@@ -101,7 +108,12 @@
         </li>
       </ul>
       <div class="form-inline my-2 my-lg-0 p-2">
-        <a href="#" class="btn btn-warning">Login</a>
+        {% if request.user.is_authenticated %}
+        <a href="{% url 'logout' %}" class="btn btn-danger">Logout</a>
+
+        {% else %}
+        <a href="{% url 'login' %}" class="btn btn-warning">Get Started</a>
+        {% endif %}
 
         <a href="{% url 'cart' %}">
           <img id="cart-icon" src="{% static 'images/cart.png' %}" />
@@ -114,14 +126,14 @@
   <div class="container-fluid">
     <br />
 
-    {% if request.path != cart and request.path != checkout %}
+    {% if request.path != cart and request.path != checkout and request.path != login and request.path != register %}
     {% include 'store/showcase.html' %}
     {% endif %}
     {% block content %} {% endblock content %}
   </div>
   <br />
   <div class="mt-5">
-    <footer class="bg-dark text-center text-white">
+    <footer class="bg-black text-center text-white">
       <!-- Grid container -->
       <div class="p-3 pb-0">
         <!-- Section: Social media -->
