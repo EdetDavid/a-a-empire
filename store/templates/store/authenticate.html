@@ -1,74 +1,154 @@
-{% extends 'main.html' %} {% load static %} {% block content %}
+<!DOCTYPE html>
+{% load static %}
 {% url 'login' as login %}
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login/Register</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+  <!-- Custom CSS -->
+  <style>
+    /* Custom Styles */
+
+    /* Background Image */
+    body {
+      background-size: cover;
+      background-position: center;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .auth-container {
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .auth-form {
+      color: white;
+    }
+
+    .auth-title {
+      text-align: center;
+      margin-top: 0;
+    }
+
+    .hr {
+      border-top: 2px solid rgba(255, 255, 255, 0.5);
+      margin-top: 15px;
+      margin-bottom: 15px;
+    }
+
+    .input-group {
+      margin-bottom: 15px;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 10px;
+      border-radius: 5px;
+      border: none;
+      background-color: rgba(255, 255, 255, 0.1);
+      color: grey;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      background-color: #1e90ff;
+      color: white;
+      cursor: pointer;
+    }
+
+    .auth-footer {
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    .auth-link {
+      color: #1e90ff;
+      text-decoration: none;
+    }
+
+    .error-message {
+      color: red;
+      text-align: center;
+    }
+  </style>
+</head>
 
 <body style="background-image: url('{% static  "images/login.jpg" %}');">
 
-  <div class="d-flex p-5 m-5 m-0 p-0  flex-column  justify-content-center align-items-center">
-    {% if request.path == login %}
-    <form class=" auth-form w-sm-50 mx-auto  bg-black position-relative" method="POST" action=" {% url 'login' %} ">
-      {% csrf_token %}
-      <div class="d-flex flex-column justify-content-center-align-items-center">
-        <h1 class="text-white  fw-bolder text-center">Login</h1>
-        <hr class="hr">
-        <input type="text" class="form-control form__login-input border-right-0 border-left-0 border-top-0 my-3"
-          name="username" placeholder="Enter Username" required />
-
-        <input type="password" class="form-control form__login-input border-right-0 border-left-0 border-top-0"
-          name="password" placeholder="Enter Password" required />
-        <button type="submit" class="btn btn-info mt-2"> Login </button>
-        {% for message in messages %}
-
-        <h5 class="text-danger text center"> {{message}} </h5>
-
-        {% endfor %}
-
-        <a class="nav-link" href="{% url 'register' %}" target="_blank" rel="noopener noreferrer">
-          <h6 class="mt-3 mb-0 text-center"> Don't Have an Account?</h6>
-        </a>
-
+  <div class="container">
+    <div class="col-md-6">
+      <div class="auth-container">
+        {% if request.path == login %}
+        <form class="auth-form" method="POST" action=" {% url 'login' %} ">
+          {% csrf_token %}
+          <h1 class="auth-title">Login</h1>
+          <hr class="hr">
+          <div class="input-group">
+            <input type="text" class="form-input" name="username" placeholder="Enter Username" required>
+          </div>
+          <div class="input-group">
+            <input type="password" class="form-input" name="password" placeholder="Enter Password" required>
+          </div>
+          <button type="submit" class="btn btn-info">Login</button>
+          {% for message in messages %}
+          <h5 class="error-message">{{ message }}</h5>
+          {% endfor %}
+          <div class="auth-footer">
+            <a href="{% url 'register' %}" class="auth-link">Don't Have an Account?</a>
+          </div>
+        </form>
+        {% else %}
+        <form class="auth-form" method="POST" action="{% url 'register' %}">
+          {% csrf_token %}
+          <h1 class="auth-title">Register</h1>
+          <hr class="hr">
+          <div class="input-group">
+            <input type="text" class="form-input" name="username" placeholder="Enter Username" required>
+          </div>
+          <div class="input-group">
+            <input type="text" class="form-input" name="email" placeholder="Enter Email" required>
+          </div>
+          <div class="input-group">
+            <input type="password" class="form-input" name="password" placeholder="Enter Password" required>
+          </div>
+          <div class="input-group">
+            <input type="password" class="form-input" name="password2" placeholder="Confirm Password" required>
+          </div>
+          <button type="submit" class="btn btn-info">Register</button>
+          {% for message in messages %}
+          <h5 class="error-message">{{ message }}</h5>
+          {% endfor %}
+          <div class="auth-footer">
+            <a href="{% url 'login' %}" class="auth-link">Already Have an Account?</a>
+          </div>
+        </form>
+        {% endif %}
       </div>
-    </form>
-
-
-    {% else %}
-
-
-    <form class=" auth-form w-sm-50 mx-auto  bg-black position-relative" method="POST" action=" {% url 'register' %} ">
-      {% csrf_token %}
-      <div class="d-flex flex-column justify-content-center-align-items-center">
-        <h1 class="text-white  fw-bolder text-center">Register</h1>
-        <hr class="hr">
-        <input type="text" class="form-control form__login-input border-right-0 border-left-0 border-top-0 my-3"
-          name="username" placeholder="Enter Username" required />
-          <input type="text" class="form-control form__login-input border-right-0 border-left-0 border-top-0 my-3"
-          name="email" placeholder="Enter Email" required />
-
-
-        <input type="password" class="form-control form__login-input border-right-0 border-left-0 border-top-0"
-          name="password" placeholder="Enter Password" required />
-          <input type="password" class="form-control form__login-input border-right-0 border-left-0 border-top-0"
-          name="password2" placeholder="Confirm Password" required />
-
-        <button type="submit" class="btn btn-info mt-2"> Register </button>
-
-        {% for message in messages %}
-
-        <h5 class="text-danger text center"> {{message}} </h5>
-
-        {% endfor %}
-
-        <a class="nav-link" href="{% url 'login' %}" target="_blank" rel="noopener noreferrer">
-          <h6 class="mt-3 mb-0 text-center"> Already Have an Account?</h6>
-        </a>
-
-      </div>
-    </form>
-
-    {% endif %}
-
-
+    </div>
   </div>
 
+  <!-- Bootstrap JS -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 
-{% endblock content %}
+</html>
