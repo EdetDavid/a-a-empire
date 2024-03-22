@@ -37,8 +37,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "store.apps.StoreConfig",
-    "embed_video",
 ]
+
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -73,19 +73,19 @@ WSGI_APPLICATION = "ecommerce.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.postgresql",
-#         "NAME": "verceldb",
-#         "USER": "default",
-#         "PASSWORD": "fVBsW4J1njyZ",
-#         "HOST": "ep-muddy-mud-a2ukbu39.eu-central-1.postgres.vercel-storage.com",
-#         "PORT": "5432",
-#     }
-# }
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "verceldb",
+        "USER": "default",
+        "PASSWORD": "fVBsW4J1njyZ",
+        "HOST": "ep-muddy-mud-a2ukbu39.eu-central-1.postgres.vercel-storage.com",
+        "PORT": "5432",
+    }
+}
 
-DATABASES = {"default": {
-    "ENGINE": "django.db.backends.sqlite3", "NAME": "db.sqlite3"}}
+# DATABASES = {"default": {
+#     "ENGINE": "django.db.backends.sqlite3", "NAME": "db.sqlite3"}}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
